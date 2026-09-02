@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<template id="__bundler_thumbnail" data-bg-color="#F0EFEA">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#F0EFEA"/><rect x="15" y="15" width="70" height="70" fill="none" stroke="#121212" stroke-width="3"/><text x="50" y="45" font-family="monospace" font-size="12" fill="#FF6A00" text-anchor="middle" font-weight="bold">ASA</text><text x="50" y="62" font-family="monospace" font-size="12" fill="#121212" text-anchor="middle" font-weight="bold">.DEV</text></svg>
+</template>
+<helmet>
+<script src="./image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#F0EFEA; --fg:#121212; --primary:#FF6A00; --primaryFg:#F0EFEA; --secondary:#121212; --secFg:#F0EFEA; --accent:#2F5728; --muted:#DFDDD8; --mutedFg:#595959; --border:#121212; --card:#F0EFEA; }
+  [data-pxtheme="dark"] { --bg:#0D0D0D; --fg:#F0EFEA; --primary:#FF6A00; --primaryFg:#0D0D0D; --secondary:#F0EFEA; --secFg:#0D0D0D; --accent:#427A38; --muted:#242424; --mutedFg:#999999; --border:#F0EFEA; --card:#141414; }
+  body { margin:0; padding:0; cursor:crosshair; }
+  a { color:var(--primary); text-decoration:none; }
+  a:hover { color:var(--primary); }
+  @keyframes blinkCursor { 0%,100%{opacity:1;} 50%{opacity:0;} }
+  @keyframes marqueeScroll { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+  @keyframes bounceY { 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+  @keyframes pixelFill { 0%{width:0%;} }
+</style>
+</helmet>
+
+<div dir="{{ dir }}" data-pxtheme="{{ theme }}" style="--primary:{{ primaryColor }}; background:var(--bg); color:var(--fg); font-family:'Space Mono',monospace; min-height:100vh; box-shadow: inset 0 0 0 2px var(--border);">
+
+  <!-- NAVBAR -->
+  <nav style="position:sticky; top:0; z-index:50; border-bottom:2px solid var(--border); background:var(--bg); display:flex; align-items:center; justify-content:space-between; padding:14px 20px; flex-wrap:wrap; gap:12px;">
+    <button onClick="{{ goHome }}" style="font-family:'Press Start 2P',monospace; font-size:12px; background:none; border:none; color:var(--fg); cursor:crosshair; padding:0;">ASA<span style="color:var(--primary);">.DEV</span></button>
+    <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+      <button onClick="{{ goHome }}" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px; background:none; border:none; color:{{ homeColor }}; cursor:crosshair; padding:0;">{{ t.nav.home }}</button>
+      <button onClick="{{ goProjects }}" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px; background:none; border:none; color:{{ projectsColor }}; cursor:crosshair; padding:0;">{{ t.nav.projects }}</button>
+      <button onClick="{{ goAcademic }}" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1px; background:none; border:none; color:{{ academicColor }}; cursor:crosshair; padding:0;">{{ t.nav.academic }}</button>
+      <sc-if value="{{ isHome }}">
+        <a href="#about" style="font-size:11px; letter-spacing:1px; color:var(--fg);">{{ t.nav.about }}</a>
+        <a href="#contact" style="font-size:11px; letter-spacing:1px; color:var(--fg);">{{ t.nav.contact }}</a>
+      </sc-if>
+    </div>
+    <div style="display:flex; align-items:center; gap:4px;">
+      <button onClick="{{ toggleLang }}" style="width:34px; height:34px; border:2px solid var(--border); background:var(--bg); color:var(--fg); font-family:system-ui,sans-serif; font-size:12px; font-weight:700; cursor:crosshair;">{{ langBtnLabel }}</button>
+      <button onClick="{{ toggleTheme }}" style="width:34px; height:34px; border:2px solid var(--border); background:var(--bg); color:var(--fg); font-family:system-ui,sans-serif; font-size:15px; cursor:crosshair;">{{ themeIcon }}</button>
+    </div>
+  </nav>
+
+  <!-- HOME VIEW -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <main>
+      <!-- HERO -->
+      <section id="hero" style="min-height:88vh; display:flex; flex-direction:column; justify-content:center; padding:64px 20px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:48px; max-width:1200px; margin:0 auto; align-items:center; width:100%;">
+          <div style="display:flex; flex-direction:column; gap:32px;">
+            <div>
+              <p style="font-size:12px; letter-spacing:2px; color:var(--mutedFg); margin:0 0 16px;">{{ t.hero.tag }}</p>
+              <h1 style="font-family:'Press Start 2P',monospace; font-size:clamp(28px,5vw,48px); line-height:1.4; margin:0;">
+                {{ t.hero.hello }}<br/>{{ t.hero.im }} <span style="color:var(--primary);">{{ t.hero.name1 }}</span><br/><span style="color:var(--primary);">{{ t.hero.name2 }}</span>
+              </h1>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="width:12px; height:12px; background:var(--primary); display:inline-block;"></span>
+              <span style="font-size:16px;">{{ displayedText }}<span style="color:var(--primary); animation:blinkCursor 1s step-end infinite;">█</span></span>
+            </div>
+            <div style="display:flex; gap:16px; flex-wrap:wrap;">
+              <a href="#projects" style="display:inline-block; border:2px solid var(--fg); padding:12px 24px; font-family:'Press Start 2P',monospace; font-size:11px; color:var(--fg);" style-hover="background:var(--primary); border-color:var(--primary); color:var(--primaryFg);">{{ t.hero.viewWork }}</a>
+              <a href="#contact" style="display:inline-block; border:2px solid var(--mutedFg); padding:12px 24px; font-family:'Press Start 2P',monospace; font-size:11px; color:var(--fg);" style-hover="border-color:var(--fg);">{{ t.hero.sayHello }}</a>
+            </div>
+          </div>
+          <div style="position:relative;">
+            <div style="border:4px double var(--fg); outline:2px solid var(--primary); outline-offset:6px; padding:0; position:relative; background:var(--bg); z-index:1;">
+              <image-slot id="hero-portrait" shape="rect" style="width:100%; aspect-ratio:1/1; display:block; filter:contrast(1.05) saturate(1.05);" placeholder="portrait / workspace shot"></image-slot>
+              <div style="position:absolute; top:0; left:0; width:16px; height:16px; border-right:2px solid var(--primary); border-bottom:2px solid var(--primary);"></div>
+              <div style="position:absolute; top:0; right:0; width:16px; height:16px; border-left:2px solid var(--primary); border-bottom:2px solid var(--primary);"></div>
+              <div style="position:absolute; bottom:0; left:0; width:16px; height:16px; border-right:2px solid var(--primary); border-top:2px solid var(--primary);"></div>
+              <div style="position:absolute; bottom:0; right:0; width:16px; height:16px; border-left:2px solid var(--primary); border-top:2px solid var(--primary);"></div>
+            </div>
+            <sc-if value="{{ openToWork }}">
+              <div style="position:absolute; bottom:-32px; right:16px; background:var(--primary); color:var(--primaryFg); padding:8px 16px; font-family:'Press Start 2P',monospace; font-size:9px;">{{ t.hero.openToWork }}</div>
+            </sc-if>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:48px;">
+          <span style="font-size:10px; letter-spacing:2px; color:var(--mutedFg);">{{ t.hero.scroll }}</span>
+          <div style="animation:bounceY 1.5s ease-in-out infinite; color:var(--primary); font-size:14px;">▾</div>
+        </div>
+      </section>
+
+      <!-- PROJECTS PREVIEW -->
+      <section id="projects" style="padding:80px 20px; border-top:2px solid var(--border);">
+        <div style="max-width:1200px; margin:0 auto;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:48px; flex-wrap:wrap;">
+            <div>
+              <p style="font-size:11px; letter-spacing:2px; color:var(--mutedFg); margin:0 0 12px;">{{ t.projects.tag }}</p>
+              <h2 style="font-family:'Press Start 2P',monospace; font-size:clamp(22px,3vw,32px); margin:0;">{{ t.projects.h1 }}<span style="color:var(--primary);">{{ t.projects.h2 }}</span></h2>
+            </div>
+            <p style="font-size:12px; color:var(--mutedFg); max-width:320px; line-height:1.7; margin:0;">{{ t.projects.sub }}</p>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;">
+            <sc-for list="{{ projectsHomeResolved }}" as="p" hint-placeholder-count="2">
+              <div style="border:2px solid var(--fg); position:relative; overflow:hidden;">
+                <div style="aspect-ratio:4/3; position:relative;">
+                  <image-slot id="project-{{ p.id }}-thumb" shape="rect" placeholder="{{ p.titleText }} screenshot"></image-slot>
+                </div>
+                <div style="position:absolute; top:0; left:0; background:var(--fg); color:var(--bg); font-family:'Press Start 2P',monospace; font-size:8px; padding:4px 8px;">{{ p.index }}</div>
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-top:2px solid var(--border);">
+                  <h3 style="font-family:'Press Start 2P',monospace; font-size:11px; margin:0;">{{ p.titleText }}</h3>
+                  <div style="width:32px; height:32px; border:2px solid var(--fg); display:flex; align-items:center; justify-content:center; font-size:14px;">↗</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex; justify-content:center; margin-top:40px;">
+            <button onClick="{{ goProjects }}" style="border:2px solid var(--fg); background:var(--bg); padding:14px 32px; font-family:'Press Start 2P',monospace; font-size:11px; color:var(--fg); cursor:crosshair;" style-hover="background:var(--primary); border-color:var(--primary); color:var(--primaryFg);">{{ t.projects.viewAll }}</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" style="padding:80px 20px; border-top:2px solid var(--border);">
+        <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:48px;">
+          <div>
+            <p style="font-size:11px; letter-spacing:2px; color:var(--mutedFg); margin:0 0 12px;">{{ t.about.tag }}</p>
+            <h2 style="font-family:'Press Start 2P',monospace; font-size:clamp(22px,3vw,32px); margin:0 0 32px;">{{ t.about.h1 }}<span style="color:var(--primary);">{{ t.about.h2 }}</span></h2>
+            <div style="border:2px solid var(--fg); background:var(--secondary); color:var(--secFg); padding:24px;">
+              <div style="display:flex; align-items:center; gap:8px; padding-bottom:12px; border-bottom:1px solid color-mix(in srgb, var(--secFg) 20%, transparent); margin-bottom:16px;">
+                <span style="width:8px; height:8px; background:var(--primary); display:inline-block;"></span>
+                <span style="width:8px; height:8px; background:var(--accent); display:inline-block;"></span>
+                <span style="width:8px; height:8px; background:var(--mutedFg); display:inline-block;"></span>
+                <span style="font-size:10px; margin-left:8px; opacity:0.6;">terminal.exe</span>
+              </div>
+              <div style="font-size:13px; line-height:1.9; display:flex; flex-direction:column; gap:12px;">
+                <p style="margin:0; opacity:0.5;">{{ t.about.whoami }}</p>
+                <p style="margin:0;">{{ t.about.bioPre }}<span style="color:var(--primary);">{{ t.about.bioMid }}</span>{{ t.about.bioAnd }}<span style="color:var(--primary);">{{ t.about.bioPost }}</span>{{ t.about.bioEnd }}</p>
+                <p style="margin:0; opacity:0.5;">{{ t.about.interestsCmd }}</p>
+                <p style="margin:0;">{{ t.about.interestsBody }}</p>
+                <p style="margin:0; opacity:0.5;">{{ t.about.missionCmd }}</p>
+                <p style="margin:0;">{{ t.about.missionBody }}</p>
+                <p style="margin:0; opacity:0.4;">{{ gtPrompt }}<span style="animation:blinkCursor 1s step-end infinite;">█</span></p>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="border:2px solid var(--fg); padding:20px; display:flex; align-items:center; gap:20px;" style-hover="border-color:var(--primary);">
+              <div style="width:48px; height:48px; border:2px solid var(--fg); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px;">📍</div>
+              <div>
+                <p style="font-size:10px; color:var(--mutedFg); letter-spacing:2px; margin:0;">{{ t.about.location }}</p>
+                <p style="font-family:'Press Start 2P',monospace; font-size:12px; margin:4px 0 0;">{{ t.about.locationVal }}</p>
+              </div>
+            </div>
+            <div style="border:2px solid var(--fg); padding:20px; display:flex; align-items:center; gap:20px;" style-hover="border-color:var(--primary);">
+              <div style="width:48px; height:48px; border:2px solid var(--fg); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px;">💻</div>
+              <div>
+                <p style="font-size:10px; color:var(--mutedFg); letter-spacing:2px; margin:0;">{{ t.about.speciality }}</p>
+                <p style="font-family:'Press Start 2P',monospace; font-size:12px; margin:4px 0 0;">{{ t.about.specialityVal }}</p>
+              </div>
+            </div>
+            <div style="border:2px solid var(--fg); padding:20px;">
+              <p style="font-size:10px; color:var(--mutedFg); letter-spacing:2px; margin:0 0 16px;">{{ t.about.interestsLabel }}</p>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <sc-for list="{{ t.about.tags }}" as="tag" hint-placeholder-count="2">
+                  <span style="border:2px solid var(--fg); padding:6px 14px; font-family:'Press Start 2P',monospace; font-size:10px;" style-hover="background:var(--primary); border-color:var(--primary); color:var(--primaryFg);">{{ tag }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" style="padding:80px 20px; border-top:2px solid var(--border);">
+        <div style="max-width:1200px; margin:0 auto;">
+          <p style="font-size:11px; letter-spacing:2px; color:var(--mutedFg); margin:0 0 12px;">{{ t.skills.tag }}</p>
+          <h2 style="font-family:'Press Start 2P',monospace; font-size:clamp(22px,3vw,32px); margin:0 0 48px;">{{ t.skills.h1 }}<span style="color:var(--primary);">{{ t.skills.h2 }}</span></h2>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:48px;">
+            <div style="display:flex; flex-direction:column; gap:24px;">
+              <sc-for list="{{ skillsResolved }}" as="skill" hint-placeholder-count="3">
+                <div style="border:2px solid var(--fg); padding:14px 18px;">
+                  <span style="font-size:11px; letter-spacing:1px;">{{ skill.name }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div>
+              <p style="font-size:10px; letter-spacing:2px; color:var(--mutedFg); margin:0 0 20px;">{{ t.skills.toolbox }}</p>
+              <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+                <sc-for list="{{ tools }}" as="tool" hint-placeholder-count="5">
+                  <div style="border:2px solid var(--fg); padding:14px; text-align:center;" style-hover="background:var(--primary); border-color:var(--primary); color:var(--primaryFg);">
+                    <span style="font-size:10px; letter-spacing:1px;">{{ tool }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:32px; border:2px solid color-mix(in srgb, var(--fg) 30%, transparent); padding:16px; font-size:11px; color:var(--mutedFg); line-height:1.8;">
+                <p style="margin:0; color:var(--primary);">const <span style="color:var(--fg);">developer</span> = {</p>
+                <p style="margin:0; padding-left:16px;">passion: <span style="color:var(--accent);">"infinite"</span>,</p>
+                <p style="margin:0; padding-left:16px;">coffee: <span style="color:var(--primary);">9001</span>,</p>
+                <p style="margin:0; padding-left:16px;">bugs_fixed: <span style="color:var(--primary);">∞</span>,</p>
+                <p style="margin:0;">}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" style="padding:80px 20px; border-top:2px solid var(--border);">
+        <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:48px;">
+          <div>
+            <p style="font-size:11px; letter-spacing:2px; color:var(--mutedFg); margin:0 0 12px;">{{ t.contact.tag }}</p>
+            <h2 style="font-family:'Press Start 2P',monospace; font-size:clamp(22px,3vw,32px); margin:0 0 24px;">{{ t.contact.h1 }}<span style="color:var(--primary);">{{ t.contact.h2 }}</span></h2>
+            <p style="font-size:12px; color:var(--mutedFg); line-height:1.8; max-width:420px; margin:0 0 40px;">{{ t.contact.desc }}</p>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <a href="mailto:aalhamed.is.sa@gmail.com" style="display:flex; align-items:center; gap:16px; border:2px solid color-mix(in srgb, var(--fg) 20%, transparent); padding:16px;" style-hover="border-color:var(--primary);">
+                <div style="width:40px; height:40px; border:2px solid var(--fg); display:flex; align-items:center; justify-content:center; flex-shrink:0;">✉</div>
+                <div><p style="font-size:10px; color:var(--mutedFg); letter-spacing:2px; margin:0;">EMAIL</p><p style="font-size:11px; margin:2px 0 0; color:var(--fg);">aalhamed.is.sa@gmail.com</p></div>
+              </a>
+              <a href="https://github.com/Abdullahsa-dev" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; gap:16px; border:2px solid color-mix(in srgb, var(--fg) 20%, transparent); padding:16px;" style-hover="border-color:var(--primary);">
+                <div style="width:40px; height:40px; border:2px solid var(--fg); display:flex; align-items:center; justify-content:center; flex-shrink:0;">⌘</div>
+                <div><p style="font-size:10px; color:var(--mutedFg); letter-spacing:2px; margin:0;">GITHUB</p><p style="font-size:11px; margin:2px 0 0; color:var(--fg);">github.com/Abdullahsa-dev</p></div>
+              </a>
+              <a href="https://www.linkedin.com/in/abdullah-alhamed-b7232b373" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; gap:16px; border:2px solid color-mix(in srgb, var(--fg) 20%, transparent); padding:16px;" style-hover="border-color:var(--primary);">
+                <div style="width:40px; height:40px; border:2px solid var(--fg); display:flex; align-items:center; justify-content:center; flex-shrink:0;">in</div>
+                <div><p style="font-size:10px; color:var(--mutedFg); letter-spacing:2px; margin:0;">LINKEDIN</p><p style="font-size:11px; margin:2px 0 0; color:var(--fg);">linkedin.com/in/abdullah-alhamed</p></div>
+              </a>
+            </div>
+          </div>
+          <div style="border:2px solid var(--fg); background:var(--secondary); color:var(--secFg);">
+            <div style="display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:2px solid color-mix(in srgb, var(--secFg) 20%, transparent);">
+              <span style="width:8px; height:8px; background:var(--primary); display:inline-block;"></span>
+              <span style="width:8px; height:8px; background:var(--accent); display:inline-block;"></span>
+              <span style="width:8px; height:8px; background:var(--mutedFg); display:inline-block;"></span>
+              <span style="font-size:10px; margin-left:8px; opacity:0.6;">message.sh</span>
+            </div>
+            <form onSubmit="{{ handleSubmit }}" style="padding:24px; display:flex; flex-direction:column; gap:20px;">
+              <div>
+                <label style="display:block; font-size:10px; letter-spacing:2px; opacity:0.5; margin-bottom:8px;">{{ t.contact.nameLabel }}</label>
+                <input type="text" value="{{ name }}" onChange="{{ setName }}" required="{{ true }}" style="width:100%; background:transparent; border:none; border-bottom:2px solid color-mix(in srgb, var(--secFg) 30%, transparent); outline:none; font-family:'Space Mono',monospace; font-size:13px; padding:8px 0; color:var(--secFg); box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="display:block; font-size:10px; letter-spacing:2px; opacity:0.5; margin-bottom:8px;">{{ t.contact.emailLabel }}</label>
+                <input type="email" value="{{ email }}" onChange="{{ setEmail }}" required="{{ true }}" style="width:100%; background:transparent; border:none; border-bottom:2px solid color-mix(in srgb, var(--secFg) 30%, transparent); outline:none; font-family:'Space Mono',monospace; font-size:13px; padding:8px 0; color:var(--secFg); box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="display:block; font-size:10px; letter-spacing:2px; opacity:0.5; margin-bottom:8px;">{{ t.contact.msgLabel }}</label>
+                <textarea rows="4" value="{{ message }}" onChange="{{ setMessage }}" required="{{ true }}" style="width:100%; background:transparent; border:none; border-bottom:2px solid color-mix(in srgb, var(--secFg) 30%, transparent); outline:none; font-family:'Space Mono',monospace; font-size:13px; padding:8px 0; color:var(--secFg); resize:none; box-sizing:border-box;"></textarea>
+              </div>
+              <button type="submit" style="width:100%; border:2px solid var(--secFg); background:transparent; color:var(--secFg); padding:14px; font-family:'Press Start 2P',monospace; font-size:11px; cursor:crosshair;" style-hover="background:var(--primary); border-color:var(--primary); color:var(--primaryFg);">{{ submitLabel }}</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- PROJECTS ARCHIVE VIEW -->
+  <sc-if value="{{ isProjects }}">
+    <main style="padding:64px 20px; max-width:1200px; margin:0 auto;">
+      <button onClick="{{ goHome }}" style="background:none; border:none; color:var(--mutedFg); font-size:11px; cursor:crosshair; padding:0; margin-bottom:24px;">{{ t.projects.back }}</button>
+      <h1 style="font-family:'Press Start 2P',monospace; font-size:clamp(24px,4vw,36px); margin:0 0 32px;">{{ t.projects.h1 }}<span style="color:var(--primary);">{{ t.projects.h2 }}</span></h1>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:40px;">
+        <sc-for list="{{ projectTabs }}" as="tab" hint-placeholder-count="4">
+          <button onClick="{{ tab.onClick }}" style="border:2px solid var(--fg); padding:8px 16px; font-family:'Press Start 2P',monospace; font-size:9px; cursor:crosshair; background:{{ tab.bg }}; color:{{ tab.fg }}; border-color:{{ tab.borderColor }};">{{ tab.label }} ({{ tab.count }})</button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ hasProjects }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:24px;">
+          <sc-for list="{{ projectsResolved }}" as="p" hint-placeholder-count="2">
+            <div style="border:2px solid var(--fg);">
+              <div style="aspect-ratio:4/3;">
+                <image-slot id="archive-project-{{ p.id }}-thumb" shape="rect" placeholder="{{ p.titleText }} screenshot"></image-slot>
+              </div>
+              <div style="padding:20px;">
+                <h3 style="font-family:'Press Start 2P',monospace; font-size:12px; margin:0 0 8px;">{{ p.titleText }}</h3>
+                <p style="font-size:12px; color:var(--mutedFg); line-height:1.7; margin:0 0 16px;">{{ p.descText }}</p>
+                <p style="font-size:10px; color:var(--accent); margin:0 0 16px; letter-spacing:1px;">{{ p.tech }}</p>
+                <div style="display:flex; gap:12px;">
+                  <sc-if value="{{ p.github }}">
+                    <a href="{{ p.github }}" target="_blank" rel="noopener noreferrer" style="font-size:10px; letter-spacing:1px; border:2px solid var(--fg); padding:8px 14px; color:var(--fg);" style-hover="background:var(--primary); border-color:var(--primary); color:var(--primaryFg);">GITHUB ↗</a>
+                  </sc-if>
+                  <sc-if value="{{ p.live }}">
+                    <a href="{{ p.live }}" target="_blank" rel="noopener noreferrer" style="font-size:10px; letter-spacing:1px; border:2px solid var(--fg); padding:8px 14px; color:var(--fg);" style-hover="background:var(--primary); border-color:var(--primary); color:var(--primaryFg);">LIVE ↗</a>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ !hasProjects }}">
+        <p style="font-size:12px; color:var(--mutedFg); text-align:center; padding:48px 0;">{{ t.projects.empty }}</p>
+      </sc-if>
+    </main>
+  </sc-if>
+
+  <!-- ACADEMIC ARCHIVE VIEW -->
+  <sc-if value="{{ isAcademic }}">
+    <main style="padding:64px 20px; max-width:900px; margin:0 auto;">
+      <button onClick="{{ goHome }}" style="background:none; border:none; color:var(--mutedFg); font-size:11px; cursor:crosshair; padding:0; margin-bottom:24px;">{{ t.academic.back }}</button>
+      <h1 style="font-family:'Press Start 2P',monospace; font-size:clamp(24px,4vw,36px); margin:0 0 32px;">{{ t.academic.h1 }}<span style="color:var(--primary);">{{ t.academic.h2 }}</span></h1>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:40px;">
+        <sc-for list="{{ academicTabs }}" as="tab" hint-placeholder-count="4">
+          <button onClick="{{ tab.onClick }}" style="border:2px solid var(--fg); padding:8px 16px; font-family:'Press Start 2P',monospace; font-size:9px; cursor:crosshair; background:{{ tab.bg }}; color:{{ tab.fg }}; border-color:{{ tab.borderColor }};">{{ tab.label }} ({{ tab.count }})</button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ hasAcademic }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <sc-for list="{{ academicResolved }}" as="a" hint-placeholder-count="1">
+            <div style="border:2px solid var(--fg); padding:24px; display:flex; gap:20px; align-items:flex-start;">
+              <div style="width:44px; height:44px; border:2px solid var(--fg); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px;">🎓</div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+                  <h3 style="font-family:'Press Start 2P',monospace; font-size:13px; margin:0;">{{ a.titleText }}</h3>
+                  <span style="font-size:9px; letter-spacing:1px; border:2px solid var(--primary); color:var(--primary); padding:2px 8px;">{{ a.type }}</span>
+                </div>
+                <p style="font-size:12px; color:var(--mutedFg); margin:0 0 8px;">{{ a.institutionText }}</p>
+                <p style="font-size:11px; color:var(--mutedFg); margin:0;">📚 {{ a.fieldText }} · 📅 {{ a.start }} → {{ a.end }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </main>
+  </sc-if>
+
+  <!-- FOOTER -->
+  <footer style="border-top:2px solid var(--border);">
+    <div style="overflow:hidden; padding:20px 0; border-bottom:2px solid var(--border);">
+      <div style="animation:marqueeScroll 30s linear infinite; white-space:nowrap; display:inline-block;">
+        <span style="font-family:'Press Start 2P',monospace; font-size:clamp(20px,4vw,48px);">{{ marqueeText }}</span>
+      </div>
+    </div>
+    <div style="padding:24px 20px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; max-width:1200px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span style="font-family:'Press Start 2P',monospace; font-size:11px;">ASA<span style="color:var(--primary);">.DEV</span></span>
+        <span style="font-size:10px; color:var(--mutedFg);">© 2026</span>
+      </div>
+      <div style="display:flex; gap:20px;">
+        <a href="https://github.com/Abdullahsa-dev" target="_blank" rel="noopener noreferrer" style="font-size:10px; letter-spacing:1px; color:var(--mutedFg);">GITHUB</a>
+        <a href="https://www.linkedin.com/in/abdullah-alhamed-b7232b373" target="_blank" rel="noopener noreferrer" style="font-size:10px; letter-spacing:1px; color:var(--mutedFg);">LINKEDIN</a>
+      </div>
+      <p style="font-size:10px; color:var(--mutedFg); margin:0;">{{ t.footer.designedBy }} <span style="color:var(--primary);">ABDULLAH ALHAMED</span></p>
+      <sc-if value="{{ showVisitorCounter }}">
+        <div style="display:flex; align-items:center; gap:8px; border:2px solid var(--fg); padding:4px 10px; background:var(--secondary);">
+          <span style="font-size:9px; letter-spacing:1px; color:var(--secFg); opacity:0.6;">VISITORS</span>
+          <span style="font-family:'Press Start 2P',monospace; font-size:11px; color:var(--primary); letter-spacing:2px;">{{ visitsLabel }}</span>
+        </div>
+      </sc-if>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;primaryColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#1F3D1B&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#FF6A00&quot;, &quot;#1F3D1B&quot;, &quot;#E8483A&quot;, &quot;#3E63DD&quot;]}, &quot;openToWork&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;showVisitorCounter&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;}}">
+const ROLES_EN = ['GAME DEVELOPER', 'MACHINE LEARNING', 'AI'];
+const ROLES_AR = ['مطور ألعاب', 'تعلم الآلة', 'الذكاء الاصطناعي'];
+
+const PROJECTS = [
+  { id: 1, category: 'AI / ML', year: '2024', tech: 'HTML, CSS, JavaScript', github: 'https://github.com/Abdullahsa-dev/ai-roadmap', live: 'https://abdullahsa-dev.github.io/ai-roadmap/',
+    title: { en: 'AI Roadmap', ar: 'خارطة طريق الذكاء الاصطناعي' },
+    description: { en: 'An interactive roadmap mapping out AI learning paths — tools, concepts, and resources organized by skill level.', ar: 'موقع تفاعلي يعرض مسارات تعلم الذكاء الاصطناعي — الأدوات والمفاهيم والمصادر مرتبة حسب المستوى.' } },
+  { id: 2, category: 'GAME DEV', year: '2024', tech: 'HTML, CSS, JavaScript', github: 'https://github.com/Abdullahsa-dev/game-dev-roadmap', live: 'https://abdullahsa-dev.github.io/game-dev-roadmap/',
+    title: { en: 'Game Dev Roadmap', ar: 'خارطة طريق تطوير الألعاب' },
+    description: { en: 'A structured roadmap for aspiring game developers, breaking engines, skills, and milestones into a clear learning path.', ar: 'خارطة طريق منظمة لمطوري الألعاب الطموحين، تقسم المحركات والمهارات والمراحل إلى مسار تعلم واضح.' } },
+];
+
+const ACADEMIC = [
+  { id: 1, type: 'EDUCATION', start: '2021', end: 'PRESENT',
+    title: { en: 'BSc Information Systems', ar: 'بكالوريوس نظم المعلومات' },
+    institution: { en: 'King Abdulaziz University', ar: 'جامعة الملك عبدالعزيز' },
+    field: { en: 'Information Systems', ar: 'نظم المعلومات' } },
+];
+
+const SKILLS = [
+  { name: { en: 'PYTHON & AI', ar: 'بايثون والذكاء الاصطناعي' }, level: 10 },
+  { name: { en: 'GAME DEV', ar: 'تطوير الألعاب' }, level: 10 },
+  { name: { en: 'WEB DEV / HTML / CSS / JS', ar: 'تطوير الويب / HTML / CSS / JS' }, level: 40 },
+];
+
+const TOOLS = ['PYTHON', 'GODOT', 'UNITY', 'GITHUB', 'BLENDER'];
+
+const TRANSLATIONS = {
+  en: {
+    nav: { home: 'HOME', projects: 'PROJECTS', academic: 'ACADEMIC', about: 'ABOUT', contact: 'CONTACT' },
+    hero: { tag: '// PORTFOLIO_V1.0', hello: 'HELLO,', im: "I'M", name1: 'ABDULLAH', name2: 'ALHAMED', viewWork: 'VIEW WORK →', sayHello: 'SAY HELLO', scroll: 'SCROLL', openToWork: 'OPEN TO WORK' },
+    projects: { tag: '// 02_SELECTED_WORKS', h1: 'THE ', h2: 'ARCHIVE', sub: 'A curated selection of projects spanning game development, artificial intelligence, and creative experimentation.', viewAll: 'VIEW FULL ARCHIVE →', empty: 'NO PROJECTS IN THIS CATEGORY YET.', back: '← BACK_TO_HOME', all: 'ALL' },
+    about: { tag: '// 03_ABOUT', h1: 'THE ', h2: 'ARCHITECT', whoami: '> whoami', bioPre: "I'm a developer passionate about two frontiers: ", bioMid: 'Game Development', bioAnd: ' and ', bioPost: 'Artificial Intelligence', bioEnd: '.', interestsCmd: '> interests', interestsBody: 'Building immersive game worlds with rich mechanics, and exploring AI tools that push what one person can build.', missionCmd: '> mission', missionBody: 'Merging game-dev creativity with AI-powered workflows to ship bold, interactive, pixel-perfect experiences.', location: 'LOCATION', locationVal: 'SAUDI ARABIA, JEDDAH', speciality: 'SPECIALITY', specialityVal: 'INFORMATION SYSTEMS', interestsLabel: 'INTERESTS', tags: ['GAME DEV', 'AI'] },
+    skills: { tag: '// 04_CAPABILITIES', h1: 'SKILL ', h2: 'MAP', toolbox: 'TOOLBOX' },
+    academic: { tag: '// 06_RECORD', h1: 'MY ', h2: 'ACADEMICS', back: '← BACK_TO_HOME', all: 'ALL' },
+    contact: { tag: '// 05_TRANSMISSION', h1: "LET'S ", h2: 'CONNECT', desc: 'Have a project in mind? Looking for a collaborator? Or just want to talk pixel art and brutalist design? Drop me a message.', nameLabel: '> ENTER_NAME:', emailLabel: '> ENTER_EMAIL:', msgLabel: '> ENTER_MESSAGE:', submit: 'TRANSMIT MESSAGE', sent: 'MESSAGE SENT SUCCESSFULLY' },
+    footer: { designedBy: 'DESIGNED BY' },
+  },
+  ar: {
+    nav: { home: 'الرئيسية', projects: 'المشاريع', academic: 'الأكاديمي', about: 'نبذة', contact: 'تواصل' },
+    hero: { tag: '// المحفظة_V1.0', hello: 'مرحباً،', im: 'أنا', name1: 'عبدالله', name2: 'الحامد', viewWork: 'عرض الأعمال ←', sayHello: 'تواصل معي', scroll: 'انزل', openToWork: 'متاح للعمل' },
+    projects: { tag: '// 02_الأعمال_المختارة', h1: 'الأرشيف ', h2: 'الكامل', sub: 'مجموعة مختارة من المشاريع تمتد بين تطوير الألعاب، الذكاء الاصطناعي، والتجارب الإبداعية.', viewAll: 'عرض الأرشيف الكامل ←', empty: 'لا توجد مشاريع في هذا التصنيف حالياً.', back: '← الرئيسية', all: 'الكل' },
+    about: { tag: '// 03_عني', h1: 'المبدع ', h2: 'الرقمي', whoami: '> من أنا', bioPre: 'أنا مطوّر شغوف بمجالين: ', bioMid: 'تطوير الألعاب', bioAnd: ' و', bioPost: 'الذكاء الاصطناعي', bioEnd: '.', interestsCmd: '> الاهتمامات', interestsBody: 'بناء عوالم ألعاب غامرة بميكانيكيات ثرية، واستكشاف أدوات الذكاء الاصطناعي التي توسّع ما يمكن لفرد واحد بناءه.', missionCmd: '> الرسالة', missionBody: 'دمج إبداعية تطوير الألعاب مع أدوات الذكاء الاصطناعي لصياغة تجارب جريئة وتفاعلية ومثالية بالبيكسل.', location: 'الموقع', locationVal: 'المملكة العربية السعودية، جدة', speciality: 'التخصص', specialityVal: 'نظم المعلومات', interestsLabel: 'الاهتمامات', tags: ['تطوير الألعاب', 'الذكاء الاصطناعي'] },
+    skills: { tag: '// 04_المهارات', h1: 'خريطة ', h2: 'المهارات', toolbox: 'الأدوات' },
+    academic: { tag: '// 06_السجل', h1: 'سجلّي ', h2: 'الأكاديمي', back: '← الرئيسية', all: 'الكل' },
+    contact: { tag: '// 05_التواصل', h1: 'لنتواصل ', h2: 'معاً', desc: 'هل لديك مشروع في ذهنك؟ تبحث عن متعاون؟ أو تريد فقط التحدث عن فن البيكسل والتصميم الوحشي؟ أرسل لي رسالة.', nameLabel: '> أدخل_الاسم:', emailLabel: '> أدخل_البريد:', msgLabel: '> أدخل_الرسالة:', submit: 'إرسال الرسالة', sent: 'تم إرسال الرسالة بنجاح' },
+    footer: { designedBy: 'صمم بواسطة' },
+  },
+};
+
+class Component extends DCLogic {
+  state = {
+    lang: 'en', dark: false, view: 'home', roleIndex: 0, displayedText: '', isTyping: true,
+    projectFilter: 'ALL', academicFilter: 'ALL', name: '', email: '', message: '', sent: false,
+  };
+
+  componentDidMount() {
+    this.startTyping();
+    try {
+      const n = parseInt(localStorage.getItem('asa_dev_visits') || '1337', 10) + 1;
+      localStorage.setItem('asa_dev_visits', String(n));
+      this.setState({ visits: n });
+    } catch (e) { this.setState({ visits: 1338 }); }
+  }
+  componentWillUnmount() { clearInterval(this.typeInterval); clearTimeout(this.pauseTimeout); }
+
+  startTyping() {
+    const roles = this.state.lang === 'ar' ? ROLES_AR : ROLES_EN;
+    const role = roles[this.state.roleIndex % roles.length];
+    let i = 0;
+    clearInterval(this.typeInterval);
+    this.setState({ isTyping: true, displayedText: '' });
+    this.typeInterval = setInterval(() => {
+      i++;
+      this.setState({ displayedText: role.slice(0, i) });
+      if (i >= role.length) {
+        clearInterval(this.typeInterval);
+        this.setState({ isTyping: false });
+        this.pauseTimeout = setTimeout(() => {
+          this.setState((s) => ({ roleIndex: (s.roleIndex + 1) % roles.length }), () => this.startTyping());
+        }, 2000);
+      }
+    }, 80);
+  }
+
+  toggleLang = () => this.setState((s) => ({ lang: s.lang === 'en' ? 'ar' : 'en', roleIndex: 0 }), () => this.startTyping());
+  toggleTheme = () => this.setState((s) => ({ dark: !s.dark }));
+  setView = (v) => this.setState({ view: v });
+  setProjectFilter = (f) => this.setState({ projectFilter: f });
+  setAcademicFilter = (f) => this.setState({ academicFilter: f });
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, message } = this.state;
+    this.setState({ sending: true });
+    fetch('https://formsubmit.co/ajax/aalhamed.is.sa@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ name, email, message }),
+    })
+      .catch(() => {})
+      .finally(() => {
+        this.setState({ sending: false, sent: true, name: '', email: '', message: '' });
+        setTimeout(() => this.setState({ sent: false }), 3000);
+      });
+  };
+
+  renderVals() {
+    const { lang, dark, view, displayedText, projectFilter, academicFilter, name, email, message, sent } = this.state;
+    const isAr = lang === 'ar';
+    const t = TRANSLATIONS[lang];
+    const primaryColor = this.props.primaryColor ?? '#FF6A00';
+    const openToWork = this.props.openToWork ?? true;
+
+    const projectCats = ['ALL', 'GAME DEV', 'CYBER SECURITY', 'AI / ML'];
+    const academicTypes = ['ALL', 'EDUCATION', 'CERTIFICATION', 'COURSE'];
+
+    const resolveProject = (p) => ({ ...p, titleText: p.title[lang], descText: p.description[lang] });
+    const projectsHomeResolved = PROJECTS.map((p, i) => ({ ...resolveProject(p), index: String(i + 1).padStart(2, '0') }));
+    const projectsResolved = (projectFilter === 'ALL' ? PROJECTS : PROJECTS.filter((p) => p.category === projectFilter)).map(resolveProject);
+
+    const academicResolved = (academicFilter === 'ALL' ? ACADEMIC : ACADEMIC.filter((a) => a.type === academicFilter))
+      .map((a) => ({ ...a, titleText: a.title[lang], institutionText: a.institution[lang], fieldText: a.field[lang] }));
+
+    const projectTabs = projectCats.map((cat) => {
+      const active = projectFilter === cat;
+      return { key: cat, active, onClick: () => this.setProjectFilter(cat),
+        label: cat === 'ALL' ? t.projects.all : cat,
+        count: cat === 'ALL' ? PROJECTS.length : PROJECTS.filter((p) => p.category === cat).length,
+        bg: active ? 'var(--primary)' : 'var(--bg)', fg: active ? 'var(--primaryFg)' : 'var(--fg)', borderColor: active ? 'var(--primary)' : 'var(--fg)' };
+    });
+    const academicTabs = academicTypes.map((type) => {
+      const active = academicFilter === type;
+      return { key: type, active, onClick: () => this.setAcademicFilter(type),
+        label: type === 'ALL' ? t.academic.all : type,
+        count: type === 'ALL' ? ACADEMIC.length : ACADEMIC.filter((a) => a.type === type).length,
+        bg: active ? 'var(--primary)' : 'var(--bg)', fg: active ? 'var(--primaryFg)' : 'var(--fg)', borderColor: active ? 'var(--primary)' : 'var(--fg)' };
+    });
+
+    const skillsResolved = SKILLS.map((s) => ({
+      name: s.name[lang], level: s.level,
+      barStyle: `height:100%; width:${s.level}%; background-image:repeating-linear-gradient(90deg, var(--primary), var(--primary) 6px, color-mix(in srgb, var(--primary) 70%, transparent) 6px, color-mix(in srgb, var(--primary) 70%, transparent) 8px);`,
+    }));
+
+    const marqueeText = (isAr ? 'ASA DEV ◆ متاح للتعاون ◆ ' : 'ASA DEV ◆ OPEN FOR COLLABORATE ◆ ').repeat(6);
+    const visitsLabel = String(this.state.visits ?? 1338).padStart(6, '0');
+
+    return {
+      dir: isAr ? 'rtl' : 'ltr', theme: dark ? 'dark' : 'light', primaryColor, openToWork,
+      t, view, isHome: view === 'home', isProjects: view === 'projects', isAcademic: view === 'academic',
+      homeColor: view === 'home' ? 'var(--primary)' : 'var(--fg)',
+      projectsColor: view === 'projects' ? 'var(--primary)' : 'var(--fg)',
+      academicColor: view === 'academic' ? 'var(--primary)' : 'var(--fg)',
+      langBtnLabel: lang === 'en' ? 'ع' : 'EN', themeIcon: dark ? '☀' : '☾',
+      toggleLang: this.toggleLang, toggleTheme: this.toggleTheme,
+      goHome: () => this.setView('home'), goProjects: () => this.setView('projects'), goAcademic: () => this.setView('academic'),
+      displayedText,
+      projectsHomeResolved, projectsResolved, academicResolved, hasProjects: projectsResolved.length > 0, hasAcademic: academicResolved.length > 0,
+      projectTabs, academicTabs, skillsResolved, tools: TOOLS, marqueeText, visitsLabel,
+      showVisitorCounter: this.props.showVisitorCounter ?? false,
+      gtPrompt: '> ',
+      name, email, message, sent, setName: (e) => this.setState({ name: e.target.value }), setEmail: (e) => this.setState({ email: e.target.value }), setMessage: (e) => this.setState({ message: e.target.value }), handleSubmit: this.handleSubmit,
+      submitLabel: sent ? t.contact.sent : t.contact.submit,
+    };
+  }
+}
+</script>
+</body>
+</html>
