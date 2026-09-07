@@ -102,8 +102,7 @@
             <sc-for list="{{ projectsHomeResolved }}" as="p" hint-placeholder-count="2">
               <div style="border:2px solid var(--fg); position:relative; overflow:hidden;">
                 <div style="aspect-ratio:4/3; position:relative;">
-                  
-                  <img src="uploads/{{ p.id === 1 ? 'ai-roadmap-preview.webp' : 'game-dev-roadmap-preview.webp' }}" alt="{{ p.titleText }}" style="width:100%; height:100%; object-fit:cover; display:block;">
+                  <img src="uploads/{{ p.image }}" alt="{{ p.titleText }}" style="width:100%; height:100%; object-fit:cover; display:block;">
                   
                 </div>
                 <div style="position:absolute; top:0; left:0; background:var(--fg); color:var(--bg); font-family:'Press Start 2P',monospace; font-size:8px; padding:4px 8px;">{{ p.index }}</div>
@@ -270,7 +269,7 @@
           <sc-for list="{{ projectsResolved }}" as="p" hint-placeholder-count="2">
             <div style="border:2px solid var(--fg);">
               <div style="aspect-ratio:4/3;">
-                <img src="uploads/{{ p.id === 1 ? 'ai-roadmap-preview.webp' : 'game-dev-roadmap-preview.webp' }}" alt="{{ p.titleText }}" style="width:100%; height:100%; object-fit:cover; display:block;">
+                <img src="uploads/{{ p.image }}" alt="{{ p.titleText }}" style="width:100%; height:100%; object-fit:cover; display:block;">
               </div>
               <div style="padding:20px;">
                 <h3 style="font-family:'Press Start 2P',monospace; font-size:12px; margin:0 0 8px;">{{ p.titleText }}</h3>
@@ -357,12 +356,12 @@ const ROLES_EN = ['GAME DEVELOPER', 'MACHINE LEARNING', 'AI'];
 const ROLES_AR = ['مطور ألعاب', 'تعلم الآلة', 'الذكاء الاصطناعي'];
 
 const PROJECTS = [
-  { id: 1, image: 'ai-roadmap-preview.webp', category: 'AI / ML', year: '2024', tech: 'HTML, CSS, JavaScript', github: 'https://github.com/Abdullahsa-dev/ai-roadmap', live: 'https://abdullahsa-dev.github.io/ai-roadmap/',
+  { id: 1, image: 'ai-roadmap-preview.webp', category: 'AI / ML', year: '2026', tech: 'HTML, CSS, JavaScript', github: 'https://github.com/Abdullahsa-dev/ai-roadmap', live: 'https://abdullahsa-dev.github.io/ai-roadmap/',
     title: { en: 'AI Roadmap', ar: 'خارطة طريق الذكاء الاصطناعي' },
-    description: { en: '...', ar: '...' } },
-  { id: 2, image: 'game-dev-roadmap-preview.webp', category: 'GAME DEV', year: '2024', tech: 'HTML, CSS, JavaScript', github: 'https://github.com/Abdullahsa-dev/game-dev-roadmap', live: 'https://abdullahsa-dev.github.io/game-dev-roadmap/',
+    description: { en: 'An interactive roadmap mapping out AI learning paths — tools, concepts, and resources organized by skill level.', ar: 'موقع تفاعلي يعرض مسارات تعلم الذكاء الاصطناعي — الأدوات والمفاهيم والمصادر مرتبة حسب المستوى.' } },
+  { id: 2, image: 'game-dev-roadmap-preview.webp', category: 'GAME DEV', year: '2026', tech: 'HTML, CSS, JavaScript', github: 'https://github.com/Abdullahsa-dev/game-dev-roadmap', live: 'https://abdullahsa-dev.github.io/game-dev-roadmap/',
     title: { en: 'Game Dev Roadmap', ar: 'خارطة طريق تطوير الألعاب' },
-    description: { en: '...', ar: '...' } },
+    description: { en: 'A structured roadmap for aspiring game developers, breaking engines, skills, and milestones into a clear learning path.', ar: 'خارطة طريق منظمة لمطوري الألعاب الطموحين، تقسم المحركات والمهارات والمراحل إلى مسار تعلم واضح.' } },
 ];
 
 const ACADEMIC = [
