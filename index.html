@@ -71,7 +71,7 @@
           </div>
           <div style="position:relative;">
             <div style="border:4px double var(--fg); outline:2px solid var(--primary); outline-offset:6px; padding:0; position:relative; background:var(--bg); z-index:1;">
-              <image-slot id="hero-portrait" shape="rect" style="width:100%; aspect-ratio:1/1; display:block; filter:contrast(1.05) saturate(1.05);" placeholder="portrait / workspace shot"></image-slot>
+              <img src="uploads/profile-photo.jpg" alt="Abdullah Alhamed" style="width:100%; aspect-ratio:1/1; display:block; object-fit:cover; filter:contrast(1.05) saturate(1.05);">
               <div style="position:absolute; top:0; left:0; width:16px; height:16px; border-right:2px solid var(--primary); border-bottom:2px solid var(--primary);"></div>
               <div style="position:absolute; top:0; right:0; width:16px; height:16px; border-left:2px solid var(--primary); border-bottom:2px solid var(--primary);"></div>
               <div style="position:absolute; bottom:0; left:0; width:16px; height:16px; border-right:2px solid var(--primary); border-top:2px solid var(--primary);"></div>
@@ -102,7 +102,9 @@
             <sc-for list="{{ projectsHomeResolved }}" as="p" hint-placeholder-count="2">
               <div style="border:2px solid var(--fg); position:relative; overflow:hidden;">
                 <div style="aspect-ratio:4/3; position:relative;">
-                  <image-slot id="project-{{ p.id }}-thumb" shape="rect" placeholder="{{ p.titleText }} screenshot"></image-slot>
+                  
+                  <img src="uploads/{{ p.id === 1 ? 'ai-roadmap-preview.webp' : 'game-dev-roadmap-preview.webp' }}" alt="{{ p.titleText }}" style="width:100%; height:100%; object-fit:cover; display:block;">
+                  
                 </div>
                 <div style="position:absolute; top:0; left:0; background:var(--fg); color:var(--bg); font-family:'Press Start 2P',monospace; font-size:8px; padding:4px 8px;">{{ p.index }}</div>
                 <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-top:2px solid var(--border);">
@@ -268,7 +270,7 @@
           <sc-for list="{{ projectsResolved }}" as="p" hint-placeholder-count="2">
             <div style="border:2px solid var(--fg);">
               <div style="aspect-ratio:4/3;">
-                <image-slot id="archive-project-{{ p.id }}-thumb" shape="rect" placeholder="{{ p.titleText }} screenshot"></image-slot>
+                <img src="uploads/{{ p.id === 1 ? 'ai-roadmap-preview.webp' : 'game-dev-roadmap-preview.webp' }}" alt="{{ p.titleText }}" style="width:100%; height:100%; object-fit:cover; display:block;">
               </div>
               <div style="padding:20px;">
                 <h3 style="font-family:'Press Start 2P',monospace; font-size:12px; margin:0 0 8px;">{{ p.titleText }}</h3>
